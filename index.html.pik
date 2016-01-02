@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>First Map</title>
+  <style>
+    html,
+    body,
+    #map-canvas {
+      height: 100%;
+      margin: 0px;
+      padding: 0px
+    }
+  </style>
+
+  <script src="libraries/p5.js" type="text/javascript"></script>
+
+  <!-- Uncomment the lines below to include extra p5 libraries -->
+  <!--<script src="libraries/p5.dom.js" type="text/javascript"></script>-->
+  <!--<script src="libraries/p5.sound.js" type="text/javascript"></script>-->
+
+  <script src="sketch.js" type="text/javascript"></script>
+
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChQroR8_qsO3DsooRB_g3BZGsQu0CG4iY"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+  <script type="text/javascript">
+    var map;
+
+    var NCOLORS = {'fd': '#75adf0', 'gs': '#69bd7f', 'hw': '#fb9956', 'xg25': '#da4a4e', 'xl0': '#3e79e4', 'ml25': '#1253af'};
+    var COLORS = {'fd': '#d9ae72', 'gs': '#8c8a85', 'hw': '#4aa9d2', 'xg25': '#4f9dac', 'xl0': '#ce8e52', 'ml25': '#b67433'};
+
+
+    function initialize() {
+      var layer = "toner";
+      map = new google.maps.Map(document.getElementById('map-canvas'), {
+        center: new google.maps.LatLng(55, -115),
+        zoom: 6,
+        mapTypeId: layer,
+        mapTypeControlOptions: {
+        mapTypeIds: [layer]
+        }
+      });
+      map.mapTypes.set(layer, new google.maps.StamenMapType(layer));
+
+      // Load a GeoJSON from the same server as our demo.
+      map.data.loadGeoJson('AB_10K-ID.json');
+
+      // set initial style
+      map.data.setStyle({
+        fillColor: 'white',
+        fillOpacity: 0.0,
+        strokeWeight: 0.05,
+        strokeColor: '#000000'
+        // strokeColor: '#C0C0C0'
+      });
+
+      map.data.addListener('click', function(event) {
+        // csvfile = feature.k['csvfile'];
+        // document.getElementById('info-box').textContent = 'test';
+        //FUTURE: load christine's data via p5 call here
+          loadTable("49.7988,-117.5255.csv", function(here) {
+              alert(here.getColumn(0)[30]);
+          });
+          // data = load_CSV(event.feature.getProperty('csvfile'));
+      });
+
+      jQuery('.filter').each(function(e) {
+        jQuery(jQuery(this)).click(function(z) {
+          z.preventDefault();
+          map.data.setStyle({});
+          what=$(this).attr('id');
+          map.data.setStyle(function(feature) {
+            return {'fillOpacity': feature.k[what]['fillOpacity'], 'strokeWeight': 0.05, 'fillColor': (feature.k[what]['s'] == 'p' ? COLORS[what] : NCOLORS[what])}
+          });
+        });
+      });
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+
+  <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+</head>
+
+<body style="padding: 0; margin: 0;">
+  <div id="map-canvas"></div>
+  <div style="width: 100%; text-align: center; margin-top: 50px; font-family: arial; position:absolute; color: #fff;">
+    <h1>Hello Devin</h1>
+    <p>Bladiddy bla bla</p>
+  </div>
+  <div id="info-box" style="position: absolute; left: 0px; top: 0px; z-index:4;">
+    PLACEHOLDER
+  </div>
+  <div id="Selectbox" style="position: absolute; left: 0px; top: 40px; z-index:4;">
+    <a href="" class="filter" id="fd">fd</a>
+    <a href="" class="filter" id="gs">gs</a>
+    <a href="" class="filter" id="hw">hw</a>
+    <a href="" class="filter" id="xg25">xg25</a>
+    <a href="" class="filter" id="xl0">xl0</a>
+    <a href="" class="filter" id="ml25">ml25</a>
+  </div>
+
+</body>
+
+</html>

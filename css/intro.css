@@ -1,0 +1,285 @@
+
+#intro {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 100;
+}
+
+#intro-canvas  {
+  position: absolute;
+  overflow: hidden;
+  left: 0;
+  right: 0;
+  margin: 0;
+  height: 100vh;
+  padding: 0;
+  z-index: 103;
+  opacity: 0.3;
+}
+
+#slider1_container {
+  position: relative; 
+  margin: 0 auto;
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+  overflow: hidden;
+  z-index: 120;
+  font-size: 100%;
+}
+
+#slider {
+  position: absolute; 
+  left: 0; 
+  top: 0; 
+  width: 100%; 
+  height: 100%; 
+  overflow: hidden;
+}
+
+.titles {
+  width: 30vw;
+  color: #fff;
+  height: 500px;
+  position: relative;
+  text-align: center;
+  top: 50%;
+  margin: -250px auto;
+  perspective: none;
+}
+
+.titles h3 {
+  text-align: center;
+  font-weight: normal;
+  margin-top: 20px;
+  font-size: 2vw;
+}
+
+.titles h1 {
+  font-family: "courier-prime", monospace;
+  text-align: center;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 6.5vw;
+  letter-spacing: 0.2%;
+  line-height: .9em;
+  margin-bottom: 20px;
+}
+
+.introtext h1 {
+  text-align: left;
+  font-weight: 400;
+  font-size: 3.5vw;
+}
+
+.introtext {
+  width: 25%;
+  height: 300px;
+  position: absolute;
+  text-align: justify;
+  top: 40%;
+  margin: -150px 30vw;
+  font-size: 1vw;
+  z-index: 105;
+  perspective: none;
+}
+
+.introtext .slide3 {
+  margin-left: 50%;
+  top: 50%;
+}
+
+.introtext .slide4 {
+  right: 0;
+  width: 300px;
+  height: 500px;
+  padding: 40px;
+  color: #fff;
+  margin: -250px 0;
+}
+
+.introtext .slide4 h1 {
+font-size: 2.5%;
+  
+}
+
+.plainMap, .stationsMap { 
+	width: 50%;
+  height: 70%;
+  position: absolute;
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: contain;
+  top: 50%;
+  left: 3%;
+  margin-top: -35%;
+  z-index: 103;
+  opacity: 1;
+}
+
+.plainMap {
+    background-image: url(../imgs/nat-regions.png);
+}
+
+.plainMap .stationsMap {
+    background-image: url(../imgs/stations2.gif);
+}
+
+#intro-shape {
+  width: 130%;
+  height: 300%;
+  background: #fff;
+  position: absolute;
+  -webkit-transition: all 1s ease-in-out; 				
+	-moz-transition:  all 1s ease-in-out; 
+	-o-transition:  all 1s ease-in-out; 
+	transition: all 1s ease-in-out;
+	z-index: 102;
+}
+
+#intro-shape.slide0  {
+  right: 150%;
+  top: -100%;
+  -ms-transform: rotate(20deg); /* IE 9 */
+  -webkit-transform: rotate(20deg); /* Chrome, Safari, Opera */
+  transform: rotate(20deg);
+}
+
+#intro-shape.slide1  {
+  right: 30%;
+  top: -100%;
+  -ms-transform: rotate(20deg); /* IE 9 */
+  -webkit-transform: rotate(20deg); /* Chrome, Safari, Opera */
+  transform: rotate(20deg);
+}
+
+#intro-shape.slide2  {
+  right: 40%;
+  top: -100%;
+  -ms-transform: rotate(-30deg); /* IE 9 */
+  -webkit-transform: rotate(-30deg); /* Chrome, Safari, Opera */
+  transform: rotate(-30deg);
+}
+
+#intro-shape.slide3 {
+  right: -60%;
+  top: -150%;
+  -ms-transform: rotate(-30deg); /* IE 9 */
+  -webkit-transform: rotate(-30deg); /* Chrome, Safari, Opera */
+  transform: rotate(-30deg);
+}
+
+#intro-shape.slide4 {
+  right: 0px;
+  top: -300px;
+  width: 300px;
+  background: #000;
+  transition: background-color 1s ease;
+  -ms-transform: rotate(0deg); /* IE 9 */
+  -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+  transform: rotate(0deg);
+}
+
+#intro-image {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: cover;
+  z-index: 0;
+  right: 0;
+  
+}
+
+#intro-image.slide0 {
+  background-image: url(../imgs/AB_landscape.jpg);
+  -webkit-filter: blur(2px);
+}
+
+#intro-image.slide1 {
+  background-image: url(../imgs/AB_landscape.jpg);
+  -webkit-filter: blur(0px);
+}
+
+#intro-image.slide2 {
+  background-image: url(../imgs/weather_station.jpg);
+}
+
+#intro-image.slide3 {
+  background-image: url(../imgs/datagrid-dark.jpg);
+}
+
+#intro-image.slide4 {
+  background: #333;
+  opacity: 0.75;
+}
+
+.jssora21l, .jssora21r, .jssora21ldn, .jssora21rdn{
+  font-family: 'tall_films';
+	position: absolute;
+	cursor: pointer;
+	display: block;
+  overflow: hidden;
+  font-size: 30%;
+  line-height: 1em;
+  color: #777;
+  opacity: 0.7;
+}
+
+.jssora21l:hover, .jssora21r:hover { opacity: 1; }
+.jssora21ldn, .jssora21rdn  { .jssora21r:hover }
+
+.jssora21l.light, .jssora21r.light {
+  color: #fff;
+}
+
+#beginViz:link {
+  color: #fff;
+  padding: 5px;
+  font-size: 0.9em;
+  border: 1px solid #fff;
+  background-color: #000;
+  text-decoration: none;
+  margin-top: 25px;
+  cursor: pointer;
+  -webkit-transition: all .5s; 				
+	-moz-transition:  all .5s; 
+	-o-transition:  all .5s; 
+	transition: all .5s;
+}
+
+#beginViz:visited {
+  color: #fff;
+  background-color: #000;
+}
+
+#beginViz:hover {
+  color: #000;
+  background-color: #fff;
+}
+
+#intro .trans {
+	-webkit-transition: all 1s ease-in-out; 				
+	-moz-transition:  all 1s ease-in-out; 
+	-o-transition:  all 1s ease-in-out; 
+	transition: all 1s ease-in-out;
+}
+
+#skipIntro {
+  color: #333;
+  position: absolute;
+  font-size: 1%;
+  padding: 10px;
+  right: 0;
+  top: 0;
+  opacity: 0.5;
+  z-index: 200;
+  cursor: pointer;
+}
+

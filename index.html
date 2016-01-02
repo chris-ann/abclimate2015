@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Alberta Climate Records // BETA</title>
+
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/vstyles.css" />
+  <link rel="stylesheet" type="text/css" href="css/fonts.css" />
+  <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+  <link rel="stylesheet" type="text/css" href="css/intro.css" />
+
+	<script src="//use.typekit.net/oql7cdz.js"></script>
+  <script>try{Typekit.load();}catch(e){}</script>
+  
+  <script type="text/javascript">
+  <!--
+  if (screen.width <= 699) {
+  document.location = "http://www.albertaclimaterecords.com/mobile";
+  }
+  //-->
+  </script>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.19&key=AIzaSyChQroR8_qsO3DsooRB_g3BZGsQu0CG4iY"></script>
+<!--  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=SET_TO_TRUE_OR_FALSE"></script>-->
+  <script type="text/javascript" src="js/jssor.js"></script>
+  <script type="text/javascript" src="js/jssor.slider.js"></script>
+    <script type="text/javascript" src="js/bowser.js"></script>
+  <script type="text/javascript" src="js/introSlides.js"></script>
+   
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.4/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.4/addons/p5.dom.js"></script>
+  <!--<script type="text/javascript" src="js/gridSketch.js"></script>-->
+  <script type="text/javascript" src="js/sketch.js"></script>
+  <script type="text/javascript" src="js/scripts.js"></script>
+  <script type="text/javascript" src="js/modernizr.custom.js"></script>
+  
+  <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+  
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-58897573-1', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  
+</head>
+
+<body>
+<!--
+<div id="intro">
+    
+    <div id="intro-image" class="trans slide0"></div>
+    <div id="intro-shape" class="slide0"></div>
+    <div id="intro-canvas"></div>
+    <div id="abMap" class="trans plainMap hide" ></div>
+            
+    <div id="slider1_container">
+        <div u="slides" id="slider">
+            <div>
+              <div class="titles slide0" style="color: #fff">
+                <h1>Alberta Climate Records</h1>
+                <hr style="border: 1px solid #fff; background-colour: #fff;" />
+                <h3>Visualizing temperature change from 1950 - 2010</h3>
+              </div>
+            </div>
+            <div>
+              <div class="introtext slide1">
+              <h1>The natural state of Alberta</h1>
+              <p>The vast landscape of Alberta experiences a wide range of temperature and precipitation trends, resulting in rich ecological diversity. </p>
+              <p>The province&#39;s 6 natural regions and 21 subregions are defined by distinct natural characteristics which have evolved from each region&#39;s geological composition and climate history.</p> 
+              <p>Learn more about Alberta&#39;s Natural Regions at <a href="http://www.learnalberta.ca/" target="_blank">learnalberta.ca</a> or in this <a href="http://www.albertaparks.ca/media/2942026/nrsrcomplete_may_06.pdf" target="_blank">comprehensive document.</a></p>
+              </div>
+            </div>
+            <div>
+              <div class="introtext slide2">
+              <h1>Daily temperature recordings</h1>
+              <p>Since 1950, climate stations across Alberta have been logging daily temperture recordings.</p>
+              <p>These recordings allow scientists to measure the number of days-per-year that meet particular highs, lows, and sustained averages (variables known as Climate Indices).</p>
+              </div>
+            </div>
+            <div>
+              <div class="introtext slide3">
+              <h1>Climate data trend analysis</h1>
+              <p>Dr. Stefan Kienzle and his lab at the University of Lethbridge conducted a trend analysis of the data to discover how temperatures have been gradually changing across Alberta since 1950.</p>
+              </div>
+            </div>
+            <div>
+              <div class="introtext slide4">
+              <h1>Explore the data</h1>
+              <p>Through this application you can explore temperature trends and variability over 61 years for 6,834 locations in Alberta.</p>
+              <p>Each cell on the map is a 10 x 10 km region with data for six climate indices: growing season, heat waves, days over 25&deg;C, frost days, full days below 0&deg;C, and days below -25&deg;C.</p>
+              <p>&nbsp;</p>
+              <a href="#" id="beginViz" style="font-size: .7vw;">START EXPLORING THE DATA</a>
+            </div>
+        </div>
+
+        
+        <span u="arrowleft" id="prevBut" class="jssora21l hide" style="left: 7px;"><</span>
+        <span u="arrowright" id="nextBut" class="jssora21r light" style="right: 7px;">></span>
+        
+    </div> 
+    
+    <div id="skipIntro">SKIP INTRO</div>
+    
+  </div>
+</div> 
+-->
+    
+<header>
+  <ul>
+    <li><a href="#" id="goHome">Alberta Climate Records <span style="font-size: 11px; margin-bottom: 3px; color: #999;">[beta]</span></a></li>
+    <li><a href="#" id="data" class="altPage">DATA SOURCES</a></li>
+    <li><a href="#" id="about" class="altPage">ABOUT</a></li>
+    <li><a href="#" id="faq" class="altPage">FAQ</a></li>
+  </ul>
+</header>
+
+
+<!--<div class="loading"><img src="imgs/ajax-loader.gif"></div>-->
+
+<div class="spinner">
+  <div class="bounce1"></div>
+  <div class="bounce2"></div>
+  <div class="bounce3"></div>
+</div>
+
+<div class="container">
+  <div id="rSidebar" class="transformdiv">
+    <div id="vizToggle">
+      <a href="#" id="summary" class="transformdiv vActive"><label></label></a>
+      <a href="#" id="detail" class="transformdiv"><label></label></a>
+    </div>
+    <div id='vizContainer'></div>
+  </div><!-- end rSidebar-->
+</div><!-- end container-->
+
+<div id="preloaded-images">
+   <img src="imgs/AB_landscape.jpg" alt="" />
+   <img src="imgs/nat-regions.png" alt="" />
+   <img src="imgs/stations2.gif" alt="" />
+   <img src="imgs/weather_station.jpg" alt="" />
+   <img src="imgs/datagrid-dark.jpg" alt="" />
+   <img src="imgs/gs.png" alt="" />
+   <img src="imgs/hw.png" alt="" />
+   <img src="imgs/xg25.png" alt="" />
+   <img src="imgs/fd.png" alt="" />
+   <img src="imgs/xl0.png" alt="" />
+   <img src="imgs/ml25.png" alt="" />
+</div>
+
+<!-- DISPLAY MAP -->
+<div id="map-canvas" class="mapcontainer"></div>
+
+<!-- VIZ MENU -->
+<ul id="menu" class="menu-main">
+	<li class="trigger">
+	  <a class="icon-menu"></a>
+		<nav class="menu-wrapper transformdiv ">
+      <div class="scroller" id="selectbox">
+			<ul class="menu">
+        <li><div class="icon chooseidx">CHOOSE A CLIMATE INDEX</div></li>
+  			<li><input type="checkbox" name="gstoggle" id="gstoggle" /><label for="gstoggle"></label>
+        <a href="" id="gs" class="icon filter gsico">Growing Season Days</a>
+  			  <div class="gsInfo"><p>Each year, the growing season begins when the daily average temperature is <strong>5&deg;C</strong> or higher for at least <strong>6 consecutive days</strong> and ends when it is <strong>-5&deg;C</strong> or less for at least <strong>6 consecutive days.</strong></p>
+  			  <img src="imgs/gs-infographic.svg" alt="">
+  			  </div>
+  			</li>
+        <li><input type="checkbox" name="hwtoggle" id="hwtoggle" /><label for="hwtoggle"></label>
+        <a href="" id="hw" class="icon filter hwico">Heat Wave Days</a>
+          <div class="hwInfo"><p>The total number of days per year that were a part of a <strong>heat wave</strong>. A heat wave is when the average daily temperature is <strong>5&deg;C or more above average for at least 5 consecutive days.</strong></p>
+           <img src="imgs/hw-infographic.svg" alt=""> 
+          </div>
+        </li>
+  			<li><input type="checkbox" name="xg25toggle" id="xg25toggle" /><label for="xg25toggle"></label>
+  			<a href="" id="xg25" class="icon filter xg25ico">Days Above 25&deg;C</a>
+  			  <div class="xg25Info"><p>The total number of days per year with a <strong>maximum temp of 25&deg;C or more.</strong></p>
+  			    <img src="imgs/xg25-infographic.svg" alt="">
+  			  </div>
+  			</li>
+  			<li><input type="checkbox" name="fdtoggle" id="fdtoggle" /><label for="fdtoggle"></label>
+  			<a href="" id="fd" class="icon filter fdico">Frost Days</a>
+  			  <div class="fdInfo"><p>The total number of days per year with a <strong>minimum temp below 0&deg;C.</strong></p>
+  			  <img src="imgs/fd-infographic.svg" alt="">
+  			  </div>
+  			</li>
+  			<li><input type="checkbox" name="xl0toggle" id="xl0toggle" /><label for="xl0toggle"></label>
+  			<a href="" id="xl0" class="icon filter xl0ico">Full days below 0&deg;C</a>
+  			  <div class="xl0Info"><p>The total number of days per year with a <strong>maximum temp below 0&deg;C</strong> (below 0&deg;C all day)</p>
+  			  <img src="imgs/xl0-infographic.svg" alt="">
+  			  </div>
+  			</li>
+  			<li><input type="checkbox" name="ml25toggle" id="ml25toggle" /><label for="ml25toggle"></label>
+  			<a href="" id="ml25" class="icon filter ml25ico">Days below -25&deg;C</a>
+  			  <div class="ml25Info"><p>The total number of days per year with a <strong>minimum temp of -25&deg;C or below.</strong></p>
+  			    <img src="imgs/ml25-infographic.svg" alt="">
+  			  </div>
+  			</li>
+  			<li><input type="checkbox" name="infotoggle" id="infotoggle" /><label class="icon info" for="infotoggle"></label>
+  			  <div class="infoInfo" style="padding-right: 20px;">
+  			    <p><strong>A trend</strong> is an average that is calculated for each climate index based on all the available yearly temperature recordings.</p>
+  			    <p><strong>Variability</strong> is the natural fluctuation of temperature recordings from year to year.</p>
+  			    
+  			    <HR style="color: #fff;"/>
+  			    <p><a href="#" id="faq">READ MORE FAQ</a></p>
+  			    </div>
+  			</li>
+			</ul>
+			</div>
+		</nav>
+	</li>
+</ul><!-- end main-menu-->
+
+<div id="aboutPage">
+  <div class="pageContent">
+    <h2>About</h2>
+    <p>Alberta Climate Records is part of a Master's Thesis project by Christine Clark at the University of Lethbridge. Her research explores methods for designing information visualizations about complex topics like climate change. The visualizations feature climate data provided by Dr. Stefan W. Kienzle, Associate Professor of Hydrology and GIS at the University of Lethbridge. The dataset is made up of nearly 5 million observed climate records between 1950 and 2010 for 6,834 locations across Alberta. </p>
+    <p>Trend and Variable visualizations were created with <a href="http://p5js.org" target="_blank" >p5.js</a>, an open source JavaScript Library based on <a href="http://processing.org/ target="_blank"">Processing</a>.</p>
+    <p>The beautiful map tiles are by <a target="_blank" href="http://stamen.com">Stamen Design</a>, under <a target="_blank" href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Map data by <a target="_blank" href="http://openstreetmap.org">OpenStreetMap</a>, under <a target="_blank" href="http://www.openstreetmap.org/copyright">ODbL</a>.</p>
+    <h2>Credits:</h2>
+    <p>Design and visualization programming by Christine Clark</p>
+    <p>Data formatting and programming help from Devin Sawatzky</p>
+    <p>Data provided by Dr. Stefan Kienzle at the University of Lethbridge</p> 
+    <hr />
+        <p>For all the code, view the project on GitHub: <a href="https://github.com/chris-ann/albertaclimaterecords" target="_blank">chris-ann/albertaclimaterecords</a><p>
+    <p>For more information, contact Christine at <a href="mailto:hello@chrisann.ca">hello@chrisann.ca</a></p>
+
+  </div>
+</div>
+
+<div id="dataPage">
+  <div class="pageContent">
+    <h2>Data Sources</h2>
+    <p>The Alberta climate dataset was made available by Dr. Stefan W. Kienzle, Associate Professor of Hydrology and GIS at the University of Lethbridge.</p>
+    <p>The dataset originated from the National Land and Water Information Service (NLWIS), part of Agriculture and Agri-Food Canada (AAFC), who released the daily 10km gridded climate dataset for Canada for the period 1961-2003.  The dataset consists of 10 by 10km grids cells for daily minimum and maximum temperature (Tmin, Tmax) and precipitation (P) for the Canadian landmass south of 60&#186N. Grid values were interpolated from daily climate station recordings (Environment Canada) using a thin plate smoothing spline surface fitting method.  In comparison with other interpolation techniques, this method performs well when interpolating noisy climate data across complex terrain.</p>
+    <p>The daily climate grids were recently extended to cover the period 1950 - 2010 by Dr. Kienzle for his impacts on climate change research. This is the first public release of the extended dataset. </p>
+    <h2>Citations</h2>
+    <p>Daily 10 Km Gridded Climate Dataset: 1961-2003. [computer file]. Version 1.0, [Ottawa]: Agriculture and Agri-Food Canada. National Land and Water Information Service, [2007]</p>  
+    <p>IPCC, 2013: Annex III: Glossary [Planton, S. (ed.)]. In: <em>Climate Change 2013: The Physical Science Basis. Contribution
+of Working Group I to the Fifth Assessment Report of the Intergovernmental Panel on Climate Change</em> [Stocker, T.F.,
+D. Qin, G.-K. Plattner, M. Tignor, S.K. Allen, J. Boschung, A. Nauels, Y. Xia, V. Bex and P.M. Midgley (eds.)]. Cambridge
+University Press, Cambridge, United Kingdom and New York, NY, USA.</p>
+      
+    </div>
+</div>
+
+<div id="faqPage">
+  <div class="pageContent">
+    <div class="twothirds">
+    <h2>Definition of Temperature Indices</h2>
+      <strong>Growing Season Days</strong>
+      <div class="idximg"><br /><br /><img src="imgs/gs-infographic.svg" alt=""></div>
+    	<p>Each year, the growing season begins when the daily average temperature is <strong>5&deg;C</strong> or higher for at least <strong>6 consecutive days</strong> and ends when it is <strong>-5&deg;C</strong> or less for at least <strong>6 consecutive days.</strong></p>
+    	<hr />
+    	<strong>Heat Wave Days</strong>
+    	<div class="idximg"><br /><br /><img src="imgs/hw-infographic.svg" alt=""></div>
+    	<p>The total number of days per year that were a part of a <strong>heat wave</strong>. A heat wave is when the average daily temperature is <strong>5&deg;C or more above average for at least 5 consecutive days.</strong></p>
+      <hr  />
+      <strong>Days Above 25&deg;C</strong>
+      <div class="idximg"><img src="imgs/xg25-infographic.svg" alt=""></div>
+    	<p>The total number of days per year with a <strong>maximum temp of 25&deg;C or more.</strong></p>
+    	<hr />
+    	<strong>Frost Days</strong>
+    	<div class="idximg"><img src="imgs/fd-infographic.svg" alt=""></div>
+    	<p>The total number of days per year with a <strong>minimum temp below 0&deg;C.</strong></p>
+    	<hr />
+    	<strong>Full days below 0&deg;C</strong>
+    	<div class="idximg"><img src="imgs/xl0-infographic.svg" alt=""></div>
+    	<p>The total number of days per year with a <strong>maximum temp below 0&deg;C</strong> (below 0&deg;C all day)</p>
+    	<hr />
+    	<strong>Days below -25&deg;C</strong>
+    	<div class="idximg"><img src="imgs/ml25-infographic.svg" alt=""></div>
+    	<p>The total number of days per year with a <strong>minimum temp of -25&deg;C or below.</strong></p>
+    </div>
+    
+    <div class="third">
+    <strong>What is the difference between weather and climate?</strong>
+    <p>The difference is <strong>time</strong>. <strong>Weather</strong> refers to conditions in the atmosphere over a <strong>short period of time.</strong> <strong>Climate</strong> is how the atmosphere behaves over relatively <strong>long periods of time.</strong></p>
+    <hr />
+    <strong>What is a Climate Index?</strong> 
+    <p>A climate index is a time series of a variable, like whether daily temperature met a set value, that provide an indication of patterns in the climate system (<a href="https://www.google.ca/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0CB8QFjAA&url=https%3A%2F%2Fwww.ipcc.ch%2Fpdf%2Fassessment-report%2Far5%2Fwg1%2FWG1AR5_AnnexIII_FINAL.pdf&ei=DyrDVJ75DNLfoASMwIGQCg&usg=AFQjCNFUhw_ib8pGxUaxjc55EUXhlC_4Og&sig2=C6oMcxHS7yamvh2oWId6Zw&bvm=bv.84349003,d.cGU" target="_blank">Planton, 2013</a>).</p>
+    <hr  />
+    <strong>Trends VS. Variability</strong>
+    <p><strong>A Temperature Trend</strong> is an average that is calculated for each climate index based on all the available yearly temperature recordings.</p>
+    <p>The trends presented here were calculated based on a <a href="http://www.xlstat.com/en/products-solutions/feature/mann-kendall-trend-tests.html?gclid=CjwKEAiA_4emBRCxi8_f2cWWjFcSJAB-v1qy8XCaTqTLH6FAiNa-V3kVNvTNvk9r5lLP62ij6EgYhRoC-X_w_wcB" target="_blank">Mann-Kendall Trend Test</a></p>
+  	<hr  />
+  	<p><strong>Variability</strong> is the natural fluctuation of temperature recordings from year to year.</p>
+    </div>
+    <div style="clear: both;"></div>
+  </div>
+</div>  
+
+<footer class="clrFloat">
+    <ul id="footer-menu">
+    <li><a href="#"><em>Data and temperature trend analysis from the Kienzle lab at the University of Lethbridge</em></a></li>
+      <li class="export"><a href="" id="exportdoc" class="exportHide">Export Data for this Location</a></li>
+    </ul>
+</footer>
+
+
+
+		<script src="js/classie.js"></script>
+		<script src="js/gnmenu.js"></script>
+		<script>
+			new gnMenu( document.getElementById( 'menu' ) );
+		</script>
+</body>
+</html>
