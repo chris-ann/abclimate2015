@@ -10,8 +10,8 @@
   <link rel="stylesheet" type="text/css" href="css/normalize.css" />
   <link rel="stylesheet" type="text/css" href="css/intro.css" />
 
-	<script src="//use.typekit.net/oql7cdz.js"></script>
-  <script>try{Typekit.load();}catch(e){}</script>
+<script src="https://use.typekit.net/oql7cdz.js"></script>
+<script>try{Typekit.load({ async: true });}catch(e){}</script>
   
   <script type="text/javascript">
   <!--
@@ -23,16 +23,15 @@
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?v=3.19&key=AIzaSyChQroR8_qsO3DsooRB_g3BZGsQu0CG4iY"></script>
-<!--  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=SET_TO_TRUE_OR_FALSE"></script>-->
-  <script type="text/javascript" src="js/jssor.js"></script>
+<!--    <script type="text/javascript" src="js/jssor.js"></script>
   <script type="text/javascript" src="js/jssor.slider.js"></script>
     <script type="text/javascript" src="js/bowser.js"></script>
-  <script type="text/javascript" src="js/introSlides.js"></script>
+  <script type="text/javascript" src="js/introSlides.js"></script>-->
    
     
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.4/p5.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.4/p5.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.4/addons/p5.dom.js"></script>
-  <!--<script type="text/javascript" src="js/gridSketch.js"></script>-->
+
   <script type="text/javascript" src="js/sketch.js"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
   <script type="text/javascript" src="js/modernizr.custom.js"></script>
@@ -58,14 +57,13 @@
 <header>
   <ul>
     <li><a href="#" id="goHome">Alberta Climate Records <span style="font-size: 11px; margin-bottom: 3px; color: #999;">[beta]</span></a></li>
-    <li><a href="#" id="data" class="altPage">DATA SOURCES</a></li>
-    <li><a href="#" id="about" class="altPage">ABOUT</a></li>
-    <li><a href="#" id="faq" class="altPage">FAQ</a></li>
+    <li><a href="#" id="data" class="altPageNav" onclick="showPage()">DATA SOURCES</a></li>
+    <li><a href="#" id="about" class="altPageNav" onclick="showPage()">ABOUT</a></li>
+    <li><a href="#" id="faq" class="altPageNav" onclick="showPage()">FAQ</a></li>
   </ul>
 </header>
 
 
-<!--<div class="loading"><img src="imgs/ajax-loader.gif"></div>-->
 
 <div class="spinner">
   <div class="bounce1"></div>
@@ -104,45 +102,53 @@
 <ul id="menu" class="menu-main">
 	<li class="trigger">
 	  <a class="icon-menu"></a>
-		<nav class="menu-wrapper transformdiv ">
+		<nav class="menu-wrapper transformdiv open-all">
       <div class="scroller" id="selectbox">
 			<ul class="menu">
         <li><div class="icon chooseidx">CHOOSE A CLIMATE INDEX</div></li>
-  			<li><input type="checkbox" name="gstoggle" id="gstoggle" /><label for="gstoggle"></label>
-        <a href="" id="gs" class="icon filter gsico">Growing Season Days</a>
-  			  <div class="gsInfo"><p>Each year, the growing season begins when the daily average temperature is <strong>5&deg;C</strong> or higher for at least <strong>6 consecutive days</strong> and ends when it is <strong>-5&deg;C</strong> or less for at least <strong>6 consecutive days.</strong></p>
-  			  <img src="imgs/gs-infographic.svg" alt="">
-  			  </div>
-  			</li>
-        <li><input type="checkbox" name="hwtoggle" id="hwtoggle" /><label for="hwtoggle"></label>
-        <a href="" id="hw" class="icon filter hwico">Heat Wave Days</a>
-          <div class="hwInfo"><p>The total number of days per year that were a part of a <strong>heat wave</strong>. A heat wave is when the average daily temperature is <strong>5&deg;C or more above average for at least 5 consecutive days.</strong></p>
-           <img src="imgs/hw-infographic.svg" alt=""> 
+  			<li>
+          <input type="checkbox" name="mttoggle" id="mttoggle" />
+          <label for="mttoggle" id="mt-head" class="icon mtico">Mean Temperature </label>
+          <div id="mt-Menu">
+            <ul class="submenu">
+            <li><a href="" id="mt" class="filter">Mean Temperature</a></li>
+            <li><a href="" id="mwt" class="filter">Mean Winter Temperature</a></li>
+            <li><a href="" id="mspt" class="filter">Mean Spring Temperature</a></li>
+            <li><a href="" id="msut" class="filter">Mean Summer Temperature</a></li>
+            <li><a href="" id="mft" class="filter">Mean Fall Temperature</a></li>
+            <li><a href="" id="tr" class="filter">Temperature Range</a></li>
+            <li><a href="" id="gs" class="filter">Growing Season Length</a></li>
+            </ul>
           </div>
+  			</li>
+        <!--
+        <li>
+          <input type="checkbox" name="hwtoggle" id="hwtoggle" /><label for="hwtoggle"></label>
+          <a href="" id="hw" class="icon filter hwico">Cold Weather</a>   
         </li>
-  			<li><input type="checkbox" name="xg25toggle" id="xg25toggle" /><label for="xg25toggle"></label>
-  			<a href="" id="xg25" class="icon filter xg25ico">Days Above 25&deg;C</a>
-  			  <div class="xg25Info"><p>The total number of days per year with a <strong>maximum temp of 25&deg;C or more.</strong></p>
-  			    <img src="imgs/xg25-infographic.svg" alt="">
-  			  </div>
+  			<li>
+          <input type="checkbox" name="xg25toggle" id="xg25toggle" /><label for="xg25toggle"></label>
+  			 <a href="" id="xg25" class="icon filter xg25ico">Hot Weather</a>
+         <ul class="submenu">
+          <li><a href="" id="ml25" class="icon filter ml25ico">Days below -25&deg;C</a></li>
+          </ul>
   			</li>
-  			<li><input type="checkbox" name="fdtoggle" id="fdtoggle" /><label for="fdtoggle"></label>
-  			<a href="" id="fd" class="icon filter fdico">Frost Days</a>
-  			  <div class="fdInfo"><p>The total number of days per year with a <strong>minimum temp below 0&deg;C.</strong></p>
-  			  <img src="imgs/fd-infographic.svg" alt="">
-  			  </div>
+  			<li>
+          <input type="checkbox" name="gttoggle" id="gttoggle" /><label for="gttoggle"></label>
+  			   <a href="" id="fd" class="icon gsico">Growing Temperature</a> 
+           <div id="gt-Menu">
+             <ul class="submenu">
+              <li><a href="" id="gs" class="filter">Growing Season Length</a></li>
+              </ul>
+          </div>
   			</li>
-  			<li><input type="checkbox" name="xl0toggle" id="xl0toggle" /><label for="xl0toggle"></label>
-  			<a href="" id="xl0" class="icon filter xl0ico">Full days below 0&deg;C</a>
-  			  <div class="xl0Info"><p>The total number of days per year with a <strong>maximum temp below 0&deg;C</strong> (below 0&deg;C all day)</p>
-  			  <img src="imgs/xl0-infographic.svg" alt="">
-  			  </div>
+  			<li>
+          <input type="checkbox" name="xl0toggle" id="xl0toggle" /><label for="xl0toggle"></label>
+  			 <a href="" id="xl0" class="icon filter xl0ico">Precipitation</a>
   			</li>
-  			<li><input type="checkbox" name="ml25toggle" id="ml25toggle" /><label for="ml25toggle"></label>
-  			<a href="" id="ml25" class="icon filter ml25ico">Days below -25&deg;C</a>
-  			  <div class="ml25Info"><p>The total number of days per year with a <strong>minimum temp of -25&deg;C or below.</strong></p>
-  			    <img src="imgs/ml25-infographic.svg" alt="">
-  			  </div>
+  			<li>
+          <input type="checkbox" name="ml25toggle" id="ml25toggle" /><label for="ml25toggle"></label>
+  			 
   			</li>
   			<li><input type="checkbox" name="infotoggle" id="infotoggle" /><label class="icon info" for="infotoggle"></label>
   			  <div class="infoInfo" style="padding-right: 20px;">
@@ -152,14 +158,47 @@
   			    <HR style="color: #fff;"/>
   			    <p><a href="#" id="faq">READ MORE FAQ</a></p>
   			    </div>
-  			</li>
+  			</li>-->
 			</ul>
 			</div>
 		</nav>
 	</li>
 </ul><!-- end main-menu-->
 
-<div id="aboutPage">
+<!-- for future popups -->
+<div id="popupInfo" style="display: none">
+  <div class="gsInfo">
+    <p>Each year, the growing season begins when the daily average temperature is <strong>5&deg;C</strong> or higher for at least <strong>6 consecutive days</strong> and ends when it is <strong>-5&deg;C</strong> or less for at least <strong>6 consecutive days.</strong></p>
+    <img src="imgs/gs-infographic.svg" alt="">
+  </div>
+
+  <div class="hwInfo">
+    <p>The total number of days per year that were a part of a <strong>heat wave</strong>. A heat wave is when the average daily temperature is <strong>5&deg;C or more above average for at least 5 consecutive days.</strong></p>
+    <img src="imgs/hw-infographic.svg" alt=""> 
+  </div>
+
+  <div class="xg25Info">
+    <p>The total number of days per year with a <strong>maximum temp of 25&deg;C or more.</strong></p>
+   <img src="imgs/xg25-infographic.svg" alt="">
+  </div>
+
+  <div class="fdInfo">
+    <p>The total number of days per year with a <strong>minimum temp below 0&deg;C.</strong></p>
+    <img src="imgs/fd-infographic.svg" alt="">
+  </div>
+
+  <div class="xl0Info">
+    <p>The total number of days per year with a <strong>maximum temp below 0&deg;C</strong> (below 0&deg;C all day)</p>
+    <img src="imgs/xl0-infographic.svg" alt="">
+  </div>
+
+  <div class="ml25Info">
+    <p>The total number of days per year with a <strong>minimum temp of -25&deg;C or below.</strong></p>
+    <img src="imgs/ml25-infographic.svg" alt="">
+  </div>
+</div>
+
+<div id="aboutPage" class="altPage">
   <div class="pageContent">
     <h2>About</h2>
     <p>Alberta Climate Records is part of a Master's Thesis project by Christine Clark at the University of Lethbridge. Her research explores methods for designing information visualizations about complex topics like climate change. The visualizations feature climate data provided by Dr. Stefan W. Kienzle, Associate Professor of Hydrology and GIS at the University of Lethbridge. The dataset is made up of nearly 5 million observed climate records between 1950 and 2010 for 6,834 locations across Alberta. </p>
@@ -176,7 +215,7 @@
   </div>
 </div>
 
-<div id="dataPage">
+<div id="dataPage" class="altPage"> 
   <div class="pageContent">
     <h2>Data Sources</h2>
     <p>The Alberta climate dataset was made available by Dr. Stefan W. Kienzle, Associate Professor of Hydrology and GIS at the University of Lethbridge.</p>
@@ -192,7 +231,7 @@ University Press, Cambridge, United Kingdom and New York, NY, USA.</p>
     </div>
 </div>
 
-<div id="faqPage">
+<div id="faqPage" class="altPage">
   <div class="pageContent">
     <div class="twothirds">
     <h2>Definition of Temperature Indices</h2>
@@ -251,6 +290,17 @@ University Press, Cambridge, United Kingdom and New York, NY, USA.</p>
 		<script src="js/gnmenu.js"></script>
 		<script>
 			new gnMenu( document.getElementById( 'menu' ) );
+      function showPage(event) {
+        var altPageNav = document.querySelectorAll('.altPageNav');
+        var altPage = document.querySelectorAll('.altPage');
+        for (var x = 0; x < altPage.length; x++) {
+          $(altPageNav[x]).removeClass('navActive');
+          $(altPage[x]).removeClass('showPage');
+        }
+        var currentPage = event.target.id + "Page";
+        $(currentPage).toggleClass('showPage');
+        $(currentPage).toggleClass('navActive');
+      }
 		</script>
 </body>
 </html>

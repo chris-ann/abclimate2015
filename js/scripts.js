@@ -51,25 +51,30 @@ function initialize() {
     hereLat = event.feature.getProperty('Lat');
     hereLon = event.feature.getProperty('Lon') + 0.5;
     
+    //csvFile = "data/54.7674,-115.0812.csv";
+    csvFile = "data/" + event.feature.getProperty('csvfile');
+    print(csvFile);
+
     if (tViz === 1) {
-        loadTable(event.feature.getProperty('csvfile'), runHere); 
+        loadTable(csvFile, runHere); 
+        //Highlight selected cell
+        mapy.data.overrideStyle(event.feature, {strokeWeight: 0.5, strokeColor: '#000000'});
     } 
-//      else if (vViz === 1){
-//        loadTable(event.feature.getProperty('csvfile'), runVariability);
-//        mapy.setCenter({lat: hereLat, lng: hereLon});
-//        mapy.setZoom(10);
-//    }
+     else if (vViz === 1){
+       loadTable(csvFile, runVariability);
+       mapy.setCenter({lat: hereLat, lng: hereLon});
+       mapy.setZoom(10);
+         //Highlight selected cell
+       mapy.data.overrideStyle(event.feature, {strokeWeight: 1, strokeColor: '#000000'});
+   }
       
     ABID = event.feature.getProperty('AB_ID');
     
     //For CSV Download
-    csvFile = event.feature.getProperty('csvfile');
-    var a = document.getElementById('exportdoc');
-    a.href = csvFile;
+    document.getElementById('exportdoc').href = csvFile;
     $("#exportdoc").addClass("exportShow");
     
-    //Highlight selected cell
-    mapy.data.overrideStyle(event.feature, {strokeWeight: 0.5, strokeColor: '#000000'});
+    
   });
     
   jQuery('.filter').each(function(e) {
@@ -140,7 +145,7 @@ function initialize() {
     logFilter[log1] = what;
     log1++;
 
-    //print(logFilter[0]);
+    print(logFilter[0]);
 
     if (tViz == 1){
       vViz = 1;
@@ -154,6 +159,7 @@ function initialize() {
           strokeWeight: 0.05,
           strokeColor: '#000000'
         });
+      mapy.data.overrideStyle(event.feature, {strokeWeight: 1, strokeColor: '#000000'});
       loadTable(csvFile, runVariability);
     }
   });
@@ -168,26 +174,29 @@ function initialize() {
       mapy.panTo({lat: hereLat, lng: hereLon});
       loadTable(csvFile, runHere);
       log1 = 0;
+      print(logFilter[0]);
     }
   });
+
+
  
-  $("#about").click(function(){
-    $("#dataPage").removeClass('showPage'); $("#data").removeClass('navActive');
-    $("#faqPage").removeClass('showPage'); $("#faq").removeClass('navActive');
-    $("#aboutPage").toggleClass('showPage'); $("#about").toggleClass('navActive');
-  });
+  // $("#about").click(function(){
+  //   $("#dataPage").removeClass('showPage'); $("#data").removeClass('navActive');
+  //   $("#faqPage").removeClass('showPage'); $("#faq").removeClass('navActive');
+  //   $("#aboutPage").toggleClass('showPage'); $("#about").toggleClass('navActive');
+  // });
   
-  $("#data").click(function(){
-    $("#aboutPage").removeClass('showPage'); $("#about").removeClass('navActive');
-    $("#faqPage").removeClass('showPage'); $("#faq").removeClass('navActive');
-    $("#dataPage").toggleClass('showPage');$("#data").toggleClass('navActive');
-  });
+  // $("#data").click(function(){
+  //   $("#aboutPage").removeClass('showPage'); $("#about").removeClass('navActive');
+  //   $("#faqPage").removeClass('showPage'); $("#faq").removeClass('navActive');
+  //   $("#dataPage").toggleClass('showPage');$("#data").toggleClass('navActive');
+  // });
   
-  $("#faq").click(function(){
-    $("#aboutPage").removeClass('showPage');$("#about").removeClass('navActive');
-    $("#dataPage").removeClass('showPage');$("#data").removeClass('navActive');
-    $("#faqPage").toggleClass('showPage'); $("#faq").toggleClass('navActive');
-  });
+  // $("#faq").click(function(){
+  //   $("#aboutPage").removeClass('showPage');$("#about").removeClass('navActive');
+  //   $("#dataPage").removeClass('showPage');$("#data").removeClass('navActive');
+  //   $("#faqPage").toggleClass('showPage'); $("#faq").toggleClass('navActive');
+  // });
   
   
   $("#goHome").click(function(){

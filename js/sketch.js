@@ -102,8 +102,11 @@ function windowResized() {
   }
 }
 
-function runVariability (here) {
-  varViz = true;
+//Detail View for Variability & Trends
+
+function runVariability(here) {
+  
+ varViz = true;
   mapViz = false;
   
   removeElements();
@@ -193,23 +196,23 @@ function runVariability (here) {
       noStroke();
     }
     
-    varDivNode = createDiv(" ");
-    varDivNode.parent(vizContainer);
-    //varDivNode.style("background-color", 'black');
-    varDivNode.position(yearPos + (x1 * 2) + 5, vizHeight - (idxVar * -1) + 5);
-    varDivNode.size(8, 8);
-    varDivNode.id("year");
+    // varDivNode = createDiv(" ");
+    // varDivNode.parent(vizContainer);
+    // //varDivNode.style("background-color", 'black');
+    // varDivNode.position(yearPos + (x1 * 2) + 5, vizHeight - (idxVar * -1) + 5);
+    // varDivNode.size(8, 8);
+    // varDivNode.id("year");
 
-    varDiv = createDiv("<strong>" + round(idxVar/yScale) + "</strong> " + idxText + " in " + year);
-    varDiv.parent(vizContainer);
-    varDiv.style("color", "black");
-    varDiv.style("background-color", "white");
-    varDiv.style("font-size", "11px");
-    varDiv.style("padding", "2px");
-    varDiv.position(yearPos + (x1 * 2), vizHeight - (idxVar * -1) - 10);
-    //varDiv.size(140, 20);
-    varDiv.class('divText');
-    varDiv.class('text' + year);
+    // varDiv = createDiv("<strong>" + round(idxVar/yScale) + "</strong> " + idxText + " in " + year);
+    // varDiv.parent(vizContainer);
+    // varDiv.style("color", "black");
+    // varDiv.style("background-color", "white");
+    // varDiv.style("font-size", "11px");
+    // varDiv.style("padding", "2px");
+    // varDiv.position(yearPos + (x1 * 2), vizHeight - (idxVar * -1) - 10);
+    // //varDiv.size(140, 20);
+    // varDiv.class('divText');
+    // varDiv.class('text' + year);
     
   }
   
@@ -253,7 +256,7 @@ function runVariability (here) {
 
 
 function runHere(here) {
-  
+
   vizHeight = windowHeight - 50; // -50 for footer on bottom
   vizWidth = 300;
   resizeCanvas(vizWidth, vizHeight);

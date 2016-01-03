@@ -245,7 +245,7 @@
 		-webkit-transition: height 0.3s;
 		-moz-transition: height 0.3s;
 		transition: height 0.3s;
-		font-size: 10px;
+		font-size: 11px;
 }
 
 .submenu li a {
@@ -265,18 +265,16 @@
 }
 
 .chooseidx::before { content: url(../imgs/menu_w.png); vertical-align: -5px;}
-.gsico::before { content: url(../imgs/gs-2.png); vertical-align: -10px;}
-.gsico:hover::before, .gsico.activeBut::before { content: url(../imgs/gs.png); vertical-align: -10px;}
-.hwico::before { content: url(../imgs/hw-2.png); vertical-align: -10px;}
-.hwico:hover::before, .hwico.activeBut::before { content: url(../imgs/hw.png); vertical-align: -10px;}
-.xg25ico::before { content: url(../imgs/xg25-2.png); vertical-align: -10px; }
-.xg25ico:hover::before, .xg25ico.activeBut::before {content: url(../imgs/xg25.png); vertical-align: -10px;}
-.fdico::before { content: url(../imgs/fd-2.png); vertical-align: -10px;}
-.fdico:hover::before, .fdico.activeBut::before {content: url(../imgs/fd.png); vertical-align: -10px;}
-.xl0ico::before { content: url(../imgs/xl0-2.png); vertical-align: -10px;}
-.xl0ico:hover::before, .xl0ico.activeBut::before {content: url(../imgs/xl0.png); vertical-align: -10px;}
-.ml25ico::before { content: url(../imgs/ml25-2.png); vertical-align: -10px;}
-.ml25ico:hover::before, .ml25ico.activeBut::before{content: url(../imgs/ml25.png); vertical-align: -10px;}
+.gtico::before { content: url(../imgs/gt-ico-2.svg); vertical-align: -10px;}
+.gtico:hover::before, .gsico.activeBut::before { content: url(../imgs/gt-ico.svg); vertical-align: -10px;}
+.hwico::before { content: url(../imgs/hw-ico-2.svg); vertical-align: -10px;}
+.hwico:hover::before, .hwico.activeBut::before { content: url(../imgs/hw-ico.svg); vertical-align: -10px;}
+.cwico::before { content: url(../imgs/cw-ico-2.svg); vertical-align: -10px; }
+.cwico:hover::before, .xg25ico.activeBut::before {content: url(../imgs/cw-ico.svg); vertical-align: -10px;}
+.mtico::before { content: url(../imgs/mean-ico-2.svg); vertical-align: -10px;}
+.mtico:hover::before, .fdico.activeBut::before {content: url(../imgs/mean-ico.svg); vertical-align: -10px;}
+.pico::before { content: url(../imgs/precip-ico-2.svg); vertical-align: -10px;}
+.pico:hover::before, .xl0ico.activeBut::before {content: url(../imgs/precip-ico.svg); vertical-align: -10px;}
 .info::before {content: url(../imgs/info.png); vertical-align: -12px;}
 .info:hover::before {content: url(../imgs/info.png); vertical-align: -12px;}
 
@@ -323,7 +321,7 @@
 
 /*----- MENU DROPDOWN BOXES-----*/
 
-.gsInfo, .hwInfo, .xg25Info, .fdInfo, .xl0Info, .ml25Info, .infoInfo {
+#mt-Menu {
   background:#e5e5e5;
   color:#333;
   left: 0;
@@ -339,7 +337,7 @@
   transition:all 500ms ease; 
 }
 
-.activeBut ~ .gsInfo, .activeBut ~ .hwInfo, .activeBut ~ .xg25Info, .activeBut ~ .fdInfo, .activeBut ~ .xl0Info, .activeBut ~ .ml25Info  {
+.activeBut ~ #mt-Menu  {
   background:#fff;
 }
 
@@ -357,12 +355,7 @@
 }
 
 #infotoggle, 
-#gstoggle, 
-#hwtoggle, 
-#xg25toggle, 
-#fdtoggle, 
-#xl0toggle, 
-#ml25toggle {
+#mttoggle {
   position:absolute;
   appearance:none;
   cursor:pointer;
@@ -371,12 +364,7 @@
 }
 
 #infotoggle + label, 
-#gstoggle + label, 
-#hwtoggle + label, 
-#xg25toggle + label, 
-#fdtoggle + label, 
-#xl0toggle + label, 
-#ml25toggle + label {
+#mttoggle + label{
   cursor:pointer;
   padding: 5px;
   margin: 10px;
@@ -403,54 +391,22 @@
   
 }
 
-#gstoggle + label:after, 
-#hwtoggle + label:after, 
-#xg25toggle + label:after, 
-#fdtoggle + label:after, 
-#xl0toggle + label:after, 
-#ml25toggle + label:after {
-  content:"?" 
+#mttoggle + label:after {
+  content:">" 
 }
 
 #infotoggle + label:after {
   content: "OTHER INFO";
 }
-
-#infotoggle:checked ~ .infoInfo, 
-#gstoggle:checked ~ .gsInfo, 
-#hwtoggle:checked ~ .hwInfo, 
-#xg25toggle:checked ~ .xg25Info, 
-#fdtoggle:checked ~ .fdInfo, 
-#xl0toggle:checked ~ .xl0Info, 
-#ml25toggle:checked ~ .ml25Info  {
+ 
+#mttoggle:checked ~ #mt-Menu {
   top: 0;
-  min-height: 140px;
+  height: auto;
   transition:all 500ms ease;
 }
 
-#infotoggle:checked ~ .infoInfo {
-  height: 300px;
-}
-
-#gstoggle:checked ~ .gsInfo {
-  height: 180px;
-}
-
-#xg25toggle:checked ~ .xg25Info {
-  height: 160px;
-}
-
-#hwtoggle:checked ~ .hwInfo {
-  height: 180px;
-}
-
 /* colour of label after selected */
-#gstoggle:checked + label, 
-#hwtoggle:checked + label, 
-#xg25toggle:checked + label, 
-#fdtoggle:checked + label, 
-#xl0toggle:checked + label, 
-#ml25toggle:checked + label {
+#mttoggle:checked + label {
   background:#000;
 }
 
@@ -458,13 +414,8 @@
   background: #b1b1b1;
 } 
 
-#gstoggle:checked + label:after, 
-#hwtoggle:checked + label:after, 
-#xg25toggle:checked + label:after, 
-#fdtoggle:checked + label:after, 
-#xl0toggle:checked + label:after, 
-#ml25toggle:checked + label:after {
-  content:"X"
+#mttoggle:checked + label:after {
+  content:"v"
 }
 
 #infotoggle:checked + label:after {
