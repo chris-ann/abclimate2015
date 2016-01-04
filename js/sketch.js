@@ -5,19 +5,56 @@ var mapViz;
 var varDiv;
 var varDivNode;
 
-//-----Column Locations----//
-var FDcol = 1;
-var FDtcol = 2;
-var GScol = 5;
-var GStcol = 6;
-var HWcol = 7;
-var HWtcol = 8;
-var xG25col = 27;
-var xG25tcol = 28;
-var xL0col = 29;
-var xL0tcol = 30;
-var mL25col = 31;
-var mL25tcol = 32;
+//-----Column Names----//
+var tmeanCol = "01TMEAN"; var tmeanTCol = "01TMEAN Trendline";
+var twinterCol = "02TWinter" ; var twinterTCol = "02TWinter Trendline";
+var tspringCol = "03TSpring" ; var tspringTCol = "03TSpring Trendline" ;
+var tsummerCol = "04TSummer"; var tsummerTCol = "04TSummer Trendline";
+var tfallCol = "05TFall"; var tfallTCol = "05TFall Trendline";
+var trangeCol = "06TRange" ; var trangeTCol = "06TRange Trendline" ;
+var frostdaysCol = "21FrostDays"; var frostdaysTCol = "21FrostDays Trendline";
+
+var frostlastCol = "22FrostLast"; var frostlastTCol = "22FrostLast Trendline";
+var frostfirstCol = "23FrostFirst"  ; var frostfirstTCol = "23FrostFirst Trendline"  ;
+var icedaysCol = "24IceDays" ; var icedaysTCol = "24IceDays Trendline" ;
+var tmin10Col = "25Tmin10"  ; var tmin10TCol = "25Tmin10 Trendline" ;
+var tmin20Col = "26Tmin20"  ; var tmin20TCol = "26Tmin20 Trendline" ;
+var coldnightsCol = "27ColdNights"  ; var coldnightsTCol = "27ColdNights Trendline"  ;
+var colddaysCol = "28ColdDays"  ; var colddaysTCol = "28ColdDays Trendline"  ;
+var ColdspellCol = "29ColdSpell" ;var ColdspellTCol = "29ColdSpell Trendline" ;
+var heatingddCol = "30HeatingDD" ; var heatingddTCol = "30HeatingDD Trendline" ;
+var tmax90Col = "40Tmax90"  ; var tmax90TCol = "40Tmax90 Trendline"  ;
+
+var warmDaysCol = "40Tmax90"; var warmDaysTCol = "40Tmax90 Trendline";
+var summerdaysCol = "41SummerDays"  ; var summerdaysTCol = "41SummerDays Trendline"  ;
+var tmax30Col = "42Tmax30"  ; var tmax30TCol = "42Tmax30 Trendline"  ;
+var hwdiCol = "43HWDI"  ; var hwdiTCol = "43HWDI Trendline"  ;
+var tropnightCol = "44TropNight" ; var tropnightTCol = "44TropNight Trendline" ;
+var tmin90Col = "45Tmin90"  ; var tmin90TCol = "45Tmin90 Trendline"  ;
+var frostfreeCol = "46FrostFree" ; var frostfreeTCol = "46FrostFree Trendline" ;
+var coolingddCol = "47CoolingDD" ; var coolingddTCol = "47CoolingDD Trendline" ;
+
+var gslCol = "61GSL"; var gslTCol = "61GSL Trendline";
+var gslbeginCol = "62GSLBegin"  ; var gslbeginTCol = "62GSLBegin Trendline"  ;
+var gslendCol = "63GSLEnd" ; var gslendTCol = "63GSLEnd Trendline" ;
+var gdd0Col = "64GDD0"  ; var gdd0TCol = "64GDD0 Trendline"  ;
+var gdd5Col = "65GDD5"  ; var gdd5TCol = "65GDD5 Trendline"  ;
+var gdd10Col = "66GDD10" ; var gdd10TCol = "66GDD10 Trendline" ;
+
+var pannualCol = "81PAnnual" ; var pannualTCol = "81PAnnual Trendline" ;
+var pwinterCol = "82PWinter" ; var pwinterTCol = "82PWinter Trendline" ;
+var pspringCol = "83PSpring" ; var pspringTCol = "83PSpring Trendline" ;
+var psummerCol = "84PSummer" ; var psummerTCol = "84PSummer Trendline" ;
+var pfallCol = "85PFall" ; var pfallTCol = "85PFall Trendline" ;
+var pge2Col = "86Pge2"  ; var pge2TCol = "86Pge2 Trendline"  ;
+var pge10Col = "87Pge10" ; var pge10TCol = "87Pge10 Trendline" ;
+var pge20Col = "88Pge20" ; var pge20TCol = "88Pge20 Trendline" ;
+var p3daysCol = "89P3days"  ; var p3daysTCol = "89P3days Trendline"  ;
+var p5daysCol = "90P5days"  ; var p5daysTCol = "90P5days Trendline"  ;
+var sdpiCol = "91SDPI"  ; var sdpiTCol = "91SDPI Trendline"  ;
+var pge95Col = "92Pge95" ; var pge95TCol = "92Pge95 Trendline" ;
+var dryperiodCol = "93DryPeriod" ; var dryperiodTCol = "93DryPeriod Trendline" ;
+var pdays1Col = "94PDays1"  ; var pdays1TCol = "94PDays1 Trendline"  ;
 
 var firstRow = 6;
 var lastRow = 66;
@@ -49,18 +86,10 @@ var fxlg = 23;
 var sans = "Arial";
 var serif = "Georgia";
 
-var green;
-var greenOp;
-var orange;
-var orangeOp;
-var red;
-var redOp;
-var ltBlue;
-var ltBlueOp;
-var mdBlue;
-var mdBlueOp;
-var dkBlue;
-var dkBlueOp;
+var green = '#00c45e';
+var blue = '#0597f0';
+var yellow = '#fff30d';
+var red = 'fa4443';
 var white;
 var black;
 var grey;
@@ -75,18 +104,10 @@ function setup() {
   vizCanvas.parent('vizContainer');
   
   //--------/colors/------//
-  green = color(105, 189, 127);
-  greenOp = color(140, 138, 133);
-  orange = color(251, 153, 86);
-  orangeOp = color(74, 169, 210);
-  red = color(218, 74, 78);
-  redOp = color(79, 157, 172);
-  ltBlue = color(116, 201, 255);
-  ltBlueOp = color(217, 174, 114);
-  mdBlue = color(57, 134, 232);
-  mdBlueOp = color(206, 142, 82);
-  dkBlue = color(18, 83, 175);
-  dkBlueOp = color(182, 116, 51);
+  blue = color(255, 243, 13);
+  red = color(0, 196, 94);
+  green = color(250, 68, 67);
+  yellow = color(5, 151, 240);
   white =  color(255, 255, 255);
   black = color(0, 0, 0);
   grey = 150;
@@ -96,10 +117,10 @@ function windowResized() {
   vizHeight = windowHeight;
   resizeCanvas(vizWidth, vizHeight);
   if(tViz == 1){
-  loadTable(csvFile, runHere);
+  loadTable(csvFile, "header", runHere);
   }
   if (vViz ==1){
-  loadTable(csvFile, runVariability); 
+  loadTable(csvFile, "header", runVariability); 
   }
 }
 
@@ -107,7 +128,7 @@ function windowResized() {
 
 function runVariability(here) {
   
- varViz = true;
+  varViz = true;
   mapViz = false;
   
   removeElements();
@@ -138,23 +159,17 @@ function runVariability(here) {
   text("365 days", 61*xScale, 365*yScale + 2);
   
   // DRAW VARIABILITY LINES//
+  if ($("#mt").hasClass("activeBut") === true) {
+  variability(mtCol, mtTCol, blue, "Mean Temperature");
+  }
+  if ($("#fd").hasClass("activeBut") === true) {
+  variability( fdCol, fdTCol, blue, "Mean Temperature");
+  }
+  if ($("#warmDays").hasClass("activeBut") === true) {
+  variability(warmDays, warmDaysTCol, red, "Mean Temperature");
+  }
   if ($("#gs").hasClass("activeBut") === true) {
-  variability(GScol, GStcol, green, "GROWING SEASON DAYS");
-  }
-  if ($("#hw").hasClass("activeBut") === true){
-  variability(HWcol, HWtcol, orange, "HEAT WAVE DAYS");
-  }
-  if ($("#xg25").hasClass("activeBut") === true){
-  variability(xG25col, xG25tcol, red, "DAYS ABOVE 25\xB0C");
-  }
-  if($("#fd").hasClass("activeBut") === true){
-  variability(FDcol, FDtcol, ltBlue, "FROST DAYS");
-  }
-  if ($("#xl0").hasClass("activeBut") === true){
-  variability(xL0col, xL0tcol, mdBlue, "FULL DAYS BELOW 0\xB0C");
-  }
-  if ($("#ml25").hasClass("activeBut") === true){
-  variability(mL25col, mL25tcol, dkBlue, "DAYS BELOW -25\xB0C");
+  variability(gsCol, gsTCol, green, "Mean Temperature");
   }
   
   function variability(inputVarCol, inputTrendCol, idxColor, idxText) {
@@ -281,23 +296,17 @@ function runHere(here) {
   background(255);
   noStroke();
   
-  if (what == 'gs'){
-  trendViz(GStcol, green, greenOp, "GROWING SEASON DAYS");
-  }
-  else if (what == 'hw'){
-  trendViz(HWtcol, orange, orangeOp, "HEAT WAVE DAYS");
-  }
-  else if (what == 'xg25'){
-  trendViz(xG25tcol, red, redOp, "DAYS ABOVE 25\xB0C");
+  if (what == 'mt'){
+  trendViz(mtTCol, blue, red, "MEAN TEMPERATURE");
   }
   else if(what == 'fd'){
-  trendViz(FDtcol, ltBlue, ltBlueOp, "FROST DAYS");
+  trendViz(fdTCol, red, blue, "FROST DAYS");
   }
-  else if (what == 'xl0'){
-  trendViz(xL0tcol, mdBlue, mdBlueOp, "FULL DAYS BELOW 0\xB0C");
+  else if (what == 'warmDays'){
+  trendViz(warmDaysTCol, blue, red, "FULL DAYS BELOW 0\xB0C");
   }
-  else if (what == 'ml25'){
-  trendViz(mL25tcol, dkBlue, dkBlueOp, "DAYS BELOW -25\xB0C");
+  else if (what == 'gs'){
+  trendViz(gsTCol, red, green, "GROWING SEASON DAYS");
   }
   
   // CLASS FOR EACH TREND

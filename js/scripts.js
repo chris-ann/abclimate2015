@@ -10,8 +10,8 @@ var hereLat;
 var hereLon;
 var ABID;
 
-var COLORS = {'fd': '#75adf0', 'gs': '#69bd7f', 'hw': '#fb9956', 'xg25': '#da4a4e', 'xl0': '#3e79e4', 'ml25': '#b67433'};
-var NCOLORS = {'fd': '#d9ae72', 'gs': '#8c8a85', 'hw': '#4aa9d2', 'xg25': '#4f9dac', 'xl0': '#ce8e52', 'ml25': '#1253af'};
+var COLORS = {'frostdays': red, 'gsl': red, 'warmdays': blue, 'tmean': blue};
+var NCOLORS = {'frostdays': blue, 'gsl': green, 'warmdays': red, 'tmean': red};
 
 
 function fadeLoader() {
@@ -51,17 +51,17 @@ function initialize() {
     hereLat = event.feature.getProperty('Lat');
     hereLon = event.feature.getProperty('Lon') + 0.5;
     
-    //csvFile = "data/54.7674,-115.0812.csv";
-    csvFile = "data/" + event.feature.getProperty('csvfile');
+    csvFile = "59.4383,-111.8819.csv";
+    //csvFile = "data/" + event.feature.getProperty('csvfile');
     print(csvFile);
 
     if (tViz === 1) {
-        loadTable(csvFile, runHere); 
+        loadTable(csvFile, "header", runHere); 
         //Highlight selected cell
         mapy.data.overrideStyle(event.feature, {strokeWeight: 0.5, strokeColor: '#000000'});
     } 
      else if (vViz === 1){
-       loadTable(csvFile, runVariability);
+       loadTable(csvFile, "header", runVariability);
        mapy.setCenter({lat: hereLat, lng: hereLon});
        mapy.setZoom(10);
          //Highlight selected cell
@@ -124,12 +124,12 @@ function initialize() {
       $(this).toggleClass("activeBut");
       
       if (csvFile !== undefined) {
-        if(tViz == 1){loadTable(csvFile, runHere);}
+        if(tViz == 1){loadTable(csvFile, "header", runHere);}
         else if (vViz == 1){loadTable(csvFile, runVariability); }
       }
       else { 
         if(tViz == 1){runHere();} 
-        else if (vViz == 1){loadTable(csvFile, runVariability); }
+        else if (vViz == 1){loadTable(csvFile, "header", runVariability); }
       }
       
       
@@ -161,7 +161,7 @@ function initialize() {
           strokeColor: '#000000'
         });
       mapy.data.overrideStyle(event.feature, {strokeWeight: 1, strokeColor: '#000000'});
-      loadTable(csvFile, runVariability);
+      loadTable(csvFile, "header", runVariability);
     }
   });
   
@@ -173,7 +173,7 @@ function initialize() {
       $('.filter').removeClass('activeBut');
       jQuery('#' + logFilter[0]).click();
       mapy.panTo({lat: hereLat, lng: hereLon});
-      loadTable(csvFile, runHere);
+      loadTable(csvFile, "header", runHere);
       log1 = 0;
       print(logFilter[0]);
     }
