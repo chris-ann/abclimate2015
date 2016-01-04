@@ -136,9 +136,10 @@ function initialize() {
     });
   });
   
-  
+  // Set intital clicked item 
   jQuery('#gs').click();
-
+  document.getElementById("gttoggle").checked = true;
+  
   
   $("#detail").click(function(){
     
@@ -177,37 +178,22 @@ function initialize() {
       print(logFilter[0]);
     }
   });
-
-
- 
-  // $("#about").click(function(){
-  //   $("#dataPage").removeClass('showPage'); $("#data").removeClass('navActive');
-  //   $("#faqPage").removeClass('showPage'); $("#faq").removeClass('navActive');
-  //   $("#aboutPage").toggleClass('showPage'); $("#about").toggleClass('navActive');
-  // });
-  
-  // $("#data").click(function(){
-  //   $("#aboutPage").removeClass('showPage'); $("#about").removeClass('navActive');
-  //   $("#faqPage").removeClass('showPage'); $("#faq").removeClass('navActive');
-  //   $("#dataPage").toggleClass('showPage');$("#data").toggleClass('navActive');
-  // });
-  
-  // $("#faq").click(function(){
-  //   $("#aboutPage").removeClass('showPage');$("#about").removeClass('navActive');
-  //   $("#dataPage").removeClass('showPage');$("#data").removeClass('navActive');
-  //   $("#faqPage").toggleClass('showPage'); $("#faq").toggleClass('navActive');
-  // });
   
   
   $("#goHome").click(function(){
     $(".showPage").removeClass('showPage');
   });
   
-
-fadeLoader();
-
 }
 
-
-
 google.maps.event.addDomListener(window, 'load', initialize);
+
+
+$(document).ready(function(){
+      // change filter selection on input
+    $(":input").click(function(event){
+      var target = "#" + event.target.value;
+      jQuery(target + ' li:first-child a').click();
+    });
+});
+

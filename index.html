@@ -57,9 +57,9 @@
 <header>
   <ul>
     <li><a href="#" id="goHome">Alberta Climate Records <span style="font-size: 11px; margin-bottom: 3px; color: #999;">[beta]</span></a></li>
-    <li><a href="#" id="data" class="altPageNav" onclick="showPage()">DATA SOURCES</a></li>
-    <li><a href="#" id="about" class="altPageNav" onclick="showPage()">ABOUT</a></li>
-    <li><a href="#" id="faq" class="altPageNav" onclick="showPage()">FAQ</a></li>
+    <li><a href="#" id="dataPageNav" class="altPageNav" onclick="altPageToggle('dataPage')">DATA SOURCES</a></li>
+    <li><a href="#" id="aboutPageNav" class="altPageNav" onclick="altPageToggle('aboutPage')">ABOUT</a></li>
+    <li><a href="#" id="faqPageNav" class="altPageNav" onclick="altPageToggle('faqPage')">FAQ</a></li>
   </ul>
 </header>
 
@@ -87,83 +87,105 @@
    <img src="imgs/stations2.gif" alt="" />
    <img src="imgs/weather_station.jpg" alt="" />
    <img src="imgs/datagrid-dark.jpg" alt="" />
-   <img src="imgs/gs.png" alt="" />
-   <img src="imgs/hw.png" alt="" />
-   <img src="imgs/xg25.png" alt="" />
-   <img src="imgs/fd.png" alt="" />
-   <img src="imgs/xl0.png" alt="" />
-   <img src="imgs/ml25.png" alt="" />
+   <img src="imgs/mean-ico.svg" alt="" />
+   <img src="imgs/hw-ico.svg" alt="" />
+   <img src="imgs/cw-ico.svg" alt="" />
+   <img src="imgs/gt-ico.svg" alt="" />
+   <img src="imgs/precip-ico.svg" alt="" />
 </div>
 
 <!-- DISPLAY MAP -->
 <div id="map-canvas" class="mapcontainer"></div>
 
 <!-- VIZ MENU -->
-<ul id="menu" class="menu-main">
-	<li class="trigger">
-	  <a class="icon-menu"></a>
-		<nav class="menu-wrapper transformdiv open-all">
-      <div class="scroller" id="selectbox">
-			<ul class="menu">
-        <li><div class="icon chooseidx">CHOOSE A CLIMATE INDEX</div></li>
-  			<li>
-          <input type="checkbox" name="mttoggle" id="mttoggle" />
-          <label for="mttoggle" id="mt-head" class="icon mtico">Mean Temperature </label>
-          <div id="mt-Menu">
-            <ul class="submenu">
+<nav  class="menu-wrapper transformdiv open-all">
+  <div class="scroller" id="selectbox">
+<form>
+  	<ul id="menu">
+      <li>
+        <div class="icon chooseidx">CHOOSE A CLIMATE INDEX</div>
+      </li>
+  		
+      <li>
+        <input type="radio" name="menu" value="mt-Menu" id="mttoggle" class="navToggle" />
+        <label for="mttoggle" id="mt-head" class="icon mtico">Mean Temperature </label>
+          <ul id="mt-Menu" class="submenu">
             <li><a href="" id="mt" class="filter">Mean Temperature</a></li>
             <li><a href="" id="mwt" class="filter">Mean Winter Temperature</a></li>
             <li><a href="" id="mspt" class="filter">Mean Spring Temperature</a></li>
             <li><a href="" id="msut" class="filter">Mean Summer Temperature</a></li>
             <li><a href="" id="mft" class="filter">Mean Fall Temperature</a></li>
             <li><a href="" id="tr" class="filter">Temperature Range</a></li>
-            <li><a href="" id="gs" class="filter">Growing Season Length</a></li>
-            </ul>
-          </div>
-  			</li>
-        <!--
-        <li>
-          <input type="checkbox" name="hwtoggle" id="hwtoggle" /><label for="hwtoggle"></label>
-          <a href="" id="hw" class="icon filter hwico">Cold Weather</a>   
-        </li>
-  			<li>
-          <input type="checkbox" name="xg25toggle" id="xg25toggle" /><label for="xg25toggle"></label>
-  			 <a href="" id="xg25" class="icon filter xg25ico">Hot Weather</a>
-         <ul class="submenu">
-          <li><a href="" id="ml25" class="icon filter ml25ico">Days below -25&deg;C</a></li>
           </ul>
-  			</li>
-  			<li>
-          <input type="checkbox" name="gttoggle" id="gttoggle" /><label for="gttoggle"></label>
-  			   <a href="" id="fd" class="icon gsico">Growing Temperature</a> 
-           <div id="gt-Menu">
-             <ul class="submenu">
-              <li><a href="" id="gs" class="filter">Growing Season Length</a></li>
-              </ul>
-          </div>
-  			</li>
-  			<li>
-          <input type="checkbox" name="xl0toggle" id="xl0toggle" /><label for="xl0toggle"></label>
-  			 <a href="" id="xl0" class="icon filter xl0ico">Precipitation</a>
-  			</li>
-  			<li>
-          <input type="checkbox" name="ml25toggle" id="ml25toggle" /><label for="ml25toggle"></label>
-  			 
-  			</li>
-  			<li><input type="checkbox" name="infotoggle" id="infotoggle" /><label class="icon info" for="infotoggle"></label>
-  			  <div class="infoInfo" style="padding-right: 20px;">
-  			    <p><strong>A trend</strong> is an average that is calculated for each climate index based on all the available yearly temperature recordings.</p>
-  			    <p><strong>Variability</strong> is the natural fluctuation of temperature recordings from year to year.</p>
-  			    
-  			    <HR style="color: #fff;"/>
-  			    <p><a href="#" id="faq">READ MORE FAQ</a></p>
-  			    </div>
-  			</li>-->
-			</ul>
-			</div>
-		</nav>
-	</li>
-</ul><!-- end main-menu-->
+      </li>
+      <li>
+        <input type="radio" name="menu" value="cw-Menu" id="cwtoggle" class="navToggle" />
+        <label for="cwtoggle" class="icon cwico">Cold Weather </label>
+          <ul id="cw-Menu" class="submenu">
+            <li><a href="" id="fd" class="filter">Frost Days</a></li>
+            <li><a href="" id="frostLast" class="filter">Day of Last Frost</a></li>
+            <li><a href="" id="frostFirst" class="filter">Day of First Frost</a></li>
+            <li><a href="" id="iceDays" class="filter">Icing Days/Winter Days</a></li>
+            <li><a href="" id="tmin10" class="filter">Very Cold Days</a></li>
+            <li><a href="" id="tmin20" class="filter">Extremely Cold Days</a></li>
+            <li><a href="" id="coldNights" class="filter">Cold Nights</a></li>
+            <li><a href="" id="coldDays" class="filter">Cold Days</a></li>
+            <li><a href="" id="coldSpell" class="filter">Cold Spell</a></li>
+            <li><a href="" id="hdDays" class="filter">Heating Degree Days < 18&deg;C</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <input type="radio" name="menu" value="hw-Menu" id="hwtoggle" class="navToggle"/>
+          <label for="hwtoggle" class="icon hwico">Hot Weather</label>
+          <ul id="hw-Menu" class="submenu">
+            <li><a href="" id="warmDays" class="filter">Warm Days</a></li>
+            <li><a href="" id="sumDays" class="filter">Summer Days</a></li>
+            <li><a href="" id="hotDays" class="filter">Hot Days</a></li>
+            <li><a href="" id="warmSpells" class="filter">Warm Spells</a></li>
+            <li><a href="" id="tropNights" class="filter">Tropical Nights</a></li>
+            <li><a href="" id="warmNights" class="filter">Warm Nights</a></li>
+            <li><a href="" id="ffPeriod" class="filter">Frost Free Period</a></li>
+            <li><a href="" id="cdDays" class="filter">Cooling Degree Days > 21&deg;C</a></li>
+          </ul>
+        </li>
+
+        <li>
+        <input type="radio" name="menu" value="gt-Menu" id="gttoggle" class="navToggle" />
+        <label for="gttoggle" class="icon gtico">Growing Temperature</label> 
+          <ul id="gt-Menu" class="submenu">
+            <li><a href="" id="gs" class="filter">Growing Season Length</a></li>
+            <li><a href="" id="gsBegin" class="filter">First Day of Growing Season</a></li>
+            <li><a href="" id="gsEnd" class="filter">End Day of Growing Season</a></li>
+            <li><a href="" id="dd0" class="filter">Growing Degree Days > 0&deg;C</a></li>
+            <li><a href="" id="dd5" class="filter">Growing Degree Days > 5&deg;C</a></li>
+            <li><a href="" id="dd10" class="filter">Growing Degree Days > 10&deg;C</a></li>
+          </ul> 
+        </li>
+      <!--
+  		<li>
+        <input type="checkbox" name="xl0toggle" id="xl0toggle" /><label for="xl0toggle"></label>
+  		 <a href="" id="xl0" class="icon filter xl0ico">Precipitation</a>
+  		</li>
+  		<li>
+        <input type="checkbox" name="ml25toggle" id="ml25toggle" /><label for="ml25toggle"></label>
+  		 
+  		</li>
+  		<li><input type="checkbox" name="infotoggle" id="infotoggle" /><label class="icon info" for="infotoggle"></label>
+  		  <div class="infoInfo" style="padding-right: 20px;">
+  		    <p><strong>A trend</strong> is an average that is calculated for each climate index based on all the available yearly temperature recordings.</p>
+  		    <p><strong>Variability</strong> is the natural fluctuation of temperature recordings from year to year.</p>
+  		    
+  		    <HR style="color: #fff;"/>
+  		    <p><a href="#" id="faq">READ MORE FAQ</a></p>
+  		    </div>
+  		</li>-->
+        
+  	
+    </ul>
+	</div>
+  </form>
+</nav><!-- end main-menu-->
 
 <!-- for future popups -->
 <div id="popupInfo" style="display: none">
@@ -284,22 +306,17 @@ University Press, Cambridge, United Kingdom and New York, NY, USA.</p>
     </ul>
 </footer>
 
-
-
 		<script src="js/classie.js"></script>
 		<script src="js/gnmenu.js"></script>
 		<script>
 			new gnMenu( document.getElementById( 'menu' ) );
-      function showPage(event) {
-        var altPageNav = document.querySelectorAll('.altPageNav');
-        var altPage = document.querySelectorAll('.altPage');
-        for (var x = 0; x < altPage.length; x++) {
-          $(altPageNav[x]).removeClass('navActive');
-          $(altPage[x]).removeClass('showPage');
-        }
-        var currentPage = event.target.id + "Page";
-        $(currentPage).toggleClass('showPage');
-        $(currentPage).toggleClass('navActive');
+
+      //Secondary pages
+      function altPageToggle(toggledPage){
+        $(".showPage").removeClass('showPage');
+        $(".altPageNav").removeClass('navActive');
+        $("#" + toggledPage).toggleClass('showPage');
+        $("#" + toggledPage + "Nav").toggleClass('navActive');
       }
 		</script>
 </body>
