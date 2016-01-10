@@ -341,9 +341,23 @@ ul.submenu {
 
 .divText {
   display: none;
+  background-color: white;
+  color: black;
+  font-size: 13px;
+  padding: 2px;
+  z-index: 100000;
 }
 
-#year:hover + div {
-  display: block;
+.year {
+display: none;
+}
 
+.vActive #vizContainer .year {
+  display: block;
+  width: 8px;
+  height: 8px;
+}
+
+.vActive #vizContainer .year:hover + div {
+  display: block;
 }

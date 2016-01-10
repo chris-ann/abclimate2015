@@ -5,6 +5,10 @@ var mapViz;
 var varDiv;
 var varDivNode;
 
+var GScol = 49;
+var GStcol = 50;
+
+
 //-----Column Names----//
 var tmeanCol = "01TMEAN"; var tmeanTCol = "01TMEAN Trendline";
 var twinterCol = "02TWinter" ; var twinterTCol = "02TWinter Trendline";
@@ -15,12 +19,12 @@ var trangeCol = "06TRange" ; var trangeTCol = "06TRange Trendline" ;
 var frostdaysCol = "21FrostDays"; var frostdaysTCol = "21FrostDays Trendline";
 
 var frostlastCol = "22FrostLast"; var frostlastTCol = "22FrostLast Trendline";
-var frostfirstCol = "23FrostFirst"  ; var frostfirstTCol = "23FrostFirst Trendline"  ;
+var frostfirstCol = "23FrostFirst" ; var frostfirstTCol = "23FrostFirst Trendline"  ;
 var icedaysCol = "24IceDays" ; var icedaysTCol = "24IceDays Trendline" ;
-var tmin10Col = "25Tmin10"  ; var tmin10TCol = "25Tmin10 Trendline" ;
-var tmin20Col = "26Tmin20"  ; var tmin20TCol = "26Tmin20 Trendline" ;
+var tmin10Col = "25Tmin10" ; var tmin10TCol = "25Tmin10 Trendline" ;
+var tmin20Col = "26Tmin20" ; var tmin20TCol = "26Tmin20 Trendline" ;
 var coldnightsCol = "27ColdNights"  ; var coldnightsTCol = "27ColdNights Trendline"  ;
-var colddaysCol = "28ColdDays"  ; var colddaysTCol = "28ColdDays Trendline"  ;
+var colddaysCol = "28ColdDays" ; var colddaysTCol = "28ColdDays Trendline"  ;
 var ColdspellCol = "29ColdSpell" ;var ColdspellTCol = "29ColdSpell Trendline" ;
 var heatingddCol = "30HeatingDD" ; var heatingddTCol = "30HeatingDD Trendline" ;
 var tmax90Col = "40Tmax90"  ; var tmax90TCol = "40Tmax90 Trendline"  ;
@@ -54,10 +58,10 @@ var p5daysCol = "90P5days"  ; var p5daysTCol = "90P5days Trendline"  ;
 var sdpiCol = "91SDPI"  ; var sdpiTCol = "91SDPI Trendline"  ;
 var pge95Col = "92Pge95" ; var pge95TCol = "92Pge95 Trendline" ;
 var dryperiodCol = "93DryPeriod" ; var dryperiodTCol = "93DryPeriod Trendline" ;
-var pdays1Col = "94PDays1"  ; var pdays1TCol = "94PDays1 Trendline"  ;
+var pdays1Col = "94PDays1"; var pdays1TCol = "94PDays1 Trendline";
 
-var firstRow = 6;
-var lastRow = 66;
+var firstRow = 2;
+var lastRow = 61;
 
 var xScale;
 var yscale;
@@ -128,6 +132,8 @@ function windowResized() {
 
 function runVariability(here) {
   
+  print("running Variability");
+
   varViz = true;
   mapViz = false;
   
@@ -138,7 +144,7 @@ function runVariability(here) {
   vizHeight = windowHeight - 90; // leave room for footer and header
   vizWidth = windowWidth*0.70;
   resizeCanvas(vizWidth, vizHeight);
-  
+
   xScale = (vizWidth - (x1*2))/61; //50 px padding on left and right
   yScale = (vizHeight - 80)/-365; //padding 40px on bottom and top, -365 to move into negative
   
@@ -163,13 +169,13 @@ function runVariability(here) {
   variability(mtCol, mtTCol, blue, "Mean Temperature");
   }
   if ($("#fd").hasClass("activeBut") === true) {
-  variability( fdCol, fdTCol, blue, "Mean Temperature");
+  variability( fdCol, fdTCol, blue, "Frost Days");
   }
   if ($("#warmDays").hasClass("activeBut") === true) {
-  variability(warmDays, warmDaysTCol, red, "Mean Temperature");
+  variability(warmDays, warmDaysTCol, red, "Warm Days");
   }
-  if ($("#gs").hasClass("activeBut") === true) {
-  variability(gsCol, gsTCol, green, "Mean Temperature");
+  if ($("#gsl").hasClass("activeBut") === true) {
+  variability(gslCol, gslTCol, green, "Growing Season Length");
   }
   
   function variability(inputVarCol, inputTrendCol, idxColor, idxText) {
@@ -212,27 +218,20 @@ function runVariability(here) {
       noStroke();
     }
     
-    // varDivNode = createDiv(" ");
-    // varDivNode.parent(vizContainer);
-    // //varDivNode.style("background-color", 'black');
-    // varDivNode.position(yearPos + (x1 * 2) + 5, vizHeight - (idxVar * -1) + 5);
-    // varDivNode.size(8, 8);
-    // varDivNode.id("year");
+    varDivNode = createDiv(" ");
+    varDivNode.parent(vizContainer);
+    varDivNode.position(yearPos + x1 + windowWidth*.04 - 4, vizHeight - (idxVar * -1) + 4);
+    varDivNode.class("year");
 
-    // varDiv = createDiv("<strong>" + round(idxVar/yScale) + "</strong> " + idxText + " in " + year);
-    // varDiv.parent(vizContainer);
-    // varDiv.style("color", "black");
-    // varDiv.style("background-color", "white");
-    // varDiv.style("font-size", "11px");
-    // varDiv.style("padding", "2px");
-    // varDiv.position(yearPos + (x1 * 2), vizHeight - (idxVar * -1) - 10);
-    // //varDiv.size(140, 20);
-    // varDiv.class('divText');
-    // varDiv.class('text' + year);
+    varDiv = createDiv("<strong>" + round(idxVar/yScale) + "</strong> " + idxText + " in " + year);
+    varDiv.parent(vizContainer);
+    varDiv.position(yearPos + x1 + windowWidth*.04 + 10, vizHeight - (idxVar * -1));
+    varDiv.class('divText');
+    varDiv.class('text' + year);
     
   }
   
-
+print(yearPos);
   //--- Trend line----//
   var trendCol = here.getColumn(inputTrendCol); //Trend column
   
@@ -273,6 +272,8 @@ function runVariability(here) {
 
 function runHere(here) {
 
+  print("Running here");
+
   vizHeight = windowHeight - 50; // -50 for footer on bottom
   vizWidth = 300;
   resizeCanvas(vizWidth, vizHeight);
@@ -303,10 +304,10 @@ function runHere(here) {
   trendViz(fdTCol, red, blue, "FROST DAYS");
   }
   else if (what == 'warmDays'){
-  trendViz(warmDaysTCol, blue, red, "FULL DAYS BELOW 0\xB0C");
+  trendViz(warmDaysTCol, blue, red, "WARM DAYS");
   }
-  else if (what == 'gs'){
-  trendViz(gsTCol, red, green, "GROWING SEASON DAYS");
+  else if (what == 'gsl'){
+  trendViz(gslTCol, red, green, "GROWING SEASON DAYS");
   }
   
   // CLASS FOR EACH TREND
@@ -375,8 +376,8 @@ function runHere(here) {
     trend2 = trendCol[lastRow];
     }
     
-    //print("first row = " + trend1);
-    //print("last row = " + trend2);
+    print("first row = " + trend1);
+    print("last row = " + trend2);
     
     //DISPLAY TREND LINE
     stroke(0);

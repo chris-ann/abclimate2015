@@ -10,8 +10,8 @@ var hereLat;
 var hereLon;
 var ABID;
 
-var COLORS = {'frostdays': red, 'gsl': red, 'warmdays': blue, 'tmean': blue};
-var NCOLORS = {'frostdays': blue, 'gsl': green, 'warmdays': red, 'tmean': red};
+var COLORS = {'frostdays': red, 'gs': red, 'warmdays': blue, 'tmean': blue};
+var NCOLORS = {'frostdays': blue, 'gs': green, 'warmdays': red, 'tmean': red};
 
 
 function fadeLoader() {
@@ -137,8 +137,8 @@ function initialize() {
   });
   
   // Set intital clicked item 
-  jQuery('#gs').click();
-  document.getElementById("gttoggle").checked = true;
+  jQuery('#tmean').click();
+  document.getElementById("mttoggle").checked = true;
   
   
   $("#detail").click(function(){
